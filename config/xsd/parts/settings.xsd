@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:envelope="http://framework.youds.com/xml/config/global/envelope"
+	xmlns:types="http://framework.youds.com/xml/config/global/types"
+	xmlns="http://framework.youds.com/xml/config/parts/settings"
+	targetNamespace="http://framework.youds.com/xml/config/parts/settings"
+	elementFormDefault="qualified"
+	version="$Id$">
+
+	<xs:import namespace="http://framework.youds.com/xml/config/global/types"
+			 schemaLocation="../_types.xsd" />
+	<xs:import namespace="http://framework.youds.com/xml/config/global/envelope"
+			 schemaLocation="../_envelope.xsd" />
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace"
+			 schemaLocation="../vendor/http/www.w3.org/XML/1998/namespace/2009-01.xsd" />
+
+	<!-- System chains -->
+	<xs:complexType name="system_chain">
+		<xs:all>
+			<xs:element name="content" type="xs:string" />
+			<xs:element name="chain" type="xs:string" />
+		</xs:all>
+		<xs:attribute name="name" type="xs:string" />
+	</xs:complexType>
+
+	<xs:group name="system_chains">
+		<xs:choice>
+			<xs:element name="system_chains" type="system_chains"
+					minOccurs="0" />
+			<xs:element name="system_chain" type="system_chain"
+					minOccurs="0" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name="system_chains">
+		<xs:sequence>
+			<xs:element name="system_chain" type="system_chain"
+					maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Settings -->
+	<xs:complexType name="setting" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+
+	<xs:complexType name="settings">
+		<xs:sequence>
+			<xs:element name="setting" type="setting"
+			 	maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="prefix" type="xs:string" />
+	</xs:complexType>
+
+	<xs:group name="settings">
+		<xs:choice>
+			<xs:element name="settings" type="settings"
+					minOccurs="0" />
+			<xs:element name="setting" type="setting"
+					minOccurs="0" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+
+	<!-- Exception templates -->
+	<xs:complexType name="exception_template">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="context" type="xs:string" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="exception_templates">
+		<xs:sequence>
+			<xs:element name="exception_template" type="exception_template"
+					maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:group name="exception_templates">
+		<xs:choice>
+			<xs:element name="exception_templates" type="exception_templates"
+					minOccurs="0" />
+			<xs:element name="exception_template" type="exception_template"
+					minOccurs="0" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+	
+	
+	
+	
+	<!-- Configuration -->
+	<xs:group name="configuration">
+		<xs:sequence>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded" >
+				<xs:group ref="system_chains"
+						minOccurs="0" />
+				<xs:group ref="settings"
+						minOccurs="0" maxOccurs="unbounded" />
+				<xs:group ref="exception_templates"
+						minOccurs="0" />			
+			</xs:sequence>
+		</xs:sequence>
+	</xs:group>
+
+</xs:schema>

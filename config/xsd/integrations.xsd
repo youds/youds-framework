@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:types="http://framework.youds.com/xml/config/global/types"
+	xmlns:integrations="http://framework.youds.com/xml/config/parts/integrations"
+	targetNamespace="http://framework.youds.com/xml/config/global/envelope"
+	elementFormDefault="qualified"
+	version="$Id$">
+
+	<xs:import namespace="http://framework.youds.com/xml/config/global/types"
+	           schemaLocation="_types.xsd" />
+	<xs:import namespace="http://framework.youds.com/xml/config/parts/integrations"
+	           schemaLocation="parts/integrations.xsd" />
+
+	<xs:redefine schemaLocation="_envelope.xsd">
+
+		<xs:complexType name="configuration">
+			<xs:complexContent>
+				<xs:extension base="configuration">
+					<xs:group ref="integrations:configuration" />
+					<xs:attributeGroup ref="types:contexts" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+
+	</xs:redefine>
+
+</xs:schema>

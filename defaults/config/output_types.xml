@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://framework.youds.com/xml/config/global/envelope" xmlns="http://framework.youds.com/xml/config/parts/output_types" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+	<!-- First Configuration Element Ignored, Imports Output Types from child element -->
+	<ae:configuration context="web"> 
+		
+		<output_types>
+
+			<output_type name="users">
+				<renderers default="default">
+					<renderer name="default">
+						<ae:parameter name="assigns">
+							<ae:parameter name="routing">ro</ae:parameter>
+							<ae:parameter name="request">rq</ae:parameter>
+							<ae:parameter name="controller">ct</ae:parameter>
+							<ae:parameter name="user">us</ae:parameter>
+							<ae:parameter name="translation_manager">tm</ae:parameter>
+							<ae:parameter name="request_data">rd</ae:parameter>
+							<ae:parameter name="generator">gt</ae:parameter>
+							<ae:parameter name="integrations">it</ae:parameter>
+						</ae:parameter>
+
+						<!-- change the default template variables array name from $template to the more convenient $t -->
+						<ae:parameter name="var_name">t</ae:parameter>
+					</renderer>
+				</renderers>
+
+				<layouts default="outer">
+					<layout name="outer">
+						<layer name="content" />
+						<layer name="decorator">
+							<ae:parameter name="directory">%core.output_dir%</ae:parameter>
+							<ae:parameter name="template">Users</ae:parameter>
+						</layer>
+					</layout>
+					<layout name="inner">
+						<layer name="content" />
+					</layout>
+				</layouts>
+
+				<ae:parameter name="http_headers">
+					<ae:parameter name="Content-Type">text/html; charset=UTF-8</ae:parameter>
+				</ae:parameter>
+			</output_type>
+            <output_type name="hook">
+                <ae:parameter name="http_headers">
+                    <ae:parameter name="Content-Type">application/json; charset=UTF-8</ae:parameter>
+                </ae:parameter>
+            </output_type>
+			<output_type name="javascript">
+				<renderers default="default">
+					<renderer name="default">
+						<ae:parameter name="assigns">
+							<ae:parameter name="routing">ro</ae:parameter>
+							<ae:parameter name="request">rq</ae:parameter>
+							<ae:parameter name="controller">ct</ae:parameter>
+							<ae:parameter name="user">us</ae:parameter>
+							<ae:parameter name="translation_manager">tm</ae:parameter>
+							<ae:parameter name="request_data">rd</ae:parameter>
+							<ae:parameter name="generator">gt</ae:parameter>
+							<ae:parameter name="integrations">it</ae:parameter>
+						</ae:parameter>
+
+						<!-- change the default template variables array name from $template to the more convenient $t -->
+						<ae:parameter name="var_name">t</ae:parameter>
+					</renderer>
+				</renderers>
+
+				<layouts default="blank">
+					<layout name="blank">
+						<layer name="content" />
+					</layout>
+				</layouts>
+
+				<ae:parameter name="http_headers">
+					<ae:parameter name="Content-Type">text/javascript; charset=UTF-8</ae:parameter>
+				</ae:parameter>
+			</output_type>
+			<output_type name="css">
+				<renderers default="default">
+					<renderer name="default">
+
+						<ae:parameter name="assigns">
+							<ae:parameter name="routing">ro</ae:parameter>
+							<ae:parameter name="request">rq</ae:parameter>
+							<ae:parameter name="controller">ct</ae:parameter>
+							<ae:parameter name="user">us</ae:parameter>
+							<ae:parameter name="translation_manager">tm</ae:parameter>
+							<ae:parameter name="request_data">rd</ae:parameter>
+							<ae:parameter name="generator">gt</ae:parameter>
+							<ae:parameter name="integrations">it</ae:parameter>
+						</ae:parameter>
+
+						<ae:parameter name="var_name">t</ae:parameter>
+					</renderer>
+
+				</renderers>
+
+				<layouts default="blank">
+					<layout name="blank">
+						<layer name="content" />
+					</layout>
+				</layouts>
+
+				<ae:parameter name="http_headers">
+					<ae:parameter name="Content-Type">text/css; charset=UTF-8</ae:parameter>
+				</ae:parameter>
+			</output_type>
+		</output_types>
+	</ae:configuration>
+	<ae:configuration context="console">
+		<output_types default="text">
+			<output_type name="text">
+				<renderers default="default">
+					<renderer name="default">
+					
+						<ae:parameter name="assigns">
+							<ae:parameter name="routing">ro</ae:parameter>
+							<ae:parameter name="request">rq</ae:parameter>
+							<ae:parameter name="controller">ct</ae:parameter>
+							<ae:parameter name="user">us</ae:parameter>
+							<ae:parameter name="translation_manager">tm</ae:parameter>
+							<ae:parameter name="request_data">rd</ae:parameter>
+							<ae:parameter name="generator">gt</ae:parameter>
+							<ae:parameter name="integrations">it</ae:parameter>
+						</ae:parameter>
+					
+						<!-- change the default template variables array name from $template to the more convenient $t -->
+						<ae:parameter name="var_name">t</ae:parameter>
+					</renderer>
+				</renderers>
+			
+				<layouts default="blank">
+					<layout name="blank">
+						<layer name="content" />
+					</layout>
+				</layouts>
+
+				<ae:parameter name="http_headers">
+					<ae:parameter name="Content-Type">text/javascript; charset=UTF-8</ae:parameter>
+				</ae:parameter>
+			</output_type>
+		</output_types>
+	</ae:configuration>
+</ae:configurations>

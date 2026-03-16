@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:annotations="http://framework.youds.com/xml/config/global/annotations"
+	xmlns:types="http://framework.youds.com/xml/config/global/types"
+	targetNamespace="http://framework.youds.com/xml/config/global/annotations"
+	elementFormDefault="qualified"
+	attributeFormDefault="qualified"
+	version="$Id$">
+
+	<xs:import namespace="http://framework.youds.com/xml/config/global/types"
+	           schemaLocation="_types.xsd" />
+
+	<xs:attributeGroup name="match">
+		<xs:attribute name="matched" type="types:matched" />
+	</xs:attributeGroup>
+
+</xs:schema>

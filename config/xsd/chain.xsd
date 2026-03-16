@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:chain="http://framework.youds.com/xml/config/parts/chain"
+	targetNamespace="http://framework.youds.com/xml/config/global/envelope"
+	elementFormDefault="qualified"
+	version="$Id$">
+
+	<xs:import namespace="http://framework.youds.com/xml/config/parts/chain"
+	           schemaLocation="parts/chain.xsd" />
+
+	<xs:redefine schemaLocation="_envelope.xsd">
+
+		<xs:complexType name="configuration">
+			<xs:complexContent>
+				<xs:extension base="configuration">
+					<xs:group ref="chain:configuration" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+
+	</xs:redefine>
+
+</xs:schema>

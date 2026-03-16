@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://framework.youds.com/xml/config/parts/validators"
+	xmlns:ae="http://framework.youds.com/xml/config/global/envelope"
+	parent="%core.src_dir%/config/defaults/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators>		
+			<validator class="Validator\Text" required="false">
+				<arguments>
+					<argument>base</argument>
+				</arguments>
+				<errors>
+					<error>Base not given</error>
+				</errors>
+			</validator>
+			<validator class="Validator\Text" required="false">
+				<arguments>
+					<argument>hooks</argument>
+				</arguments>
+			</validator>
+			<validator class="Validator\Text" required="false">
+				<arguments>
+					<argument>suites</argument>
+				</arguments>
+			</validator>
+			<validator class="Validator\Text" required="false">
+				<arguments>
+					<argument>database</argument>
+				</arguments>
+			</validator>
+			<validator class="Validator\Text" required="false">
+				<arguments>
+					<argument>content</argument>
+					<argument>chain</argument>
+				</arguments>
+			</validator>
+			<validator class="Validator\Text" required="false">
+				<arguments>
+					<argument>framework</argument>
+				</arguments>
+			</validator>
+			<validator class="Validator\Boolean" required="false">
+				<arguments>
+					<argument>defaults</argument>
+				</arguments>
+			</validator>
+		</validators>
+		
+	</ae:configuration>
+</ae:configurations>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://framework.youds.com/xml/config/global/envelope" xmlns="http://framework.youds.com/xml/config/parts/routing">
+	
+	<ae:configuration context="web">
+		<routes>
+			<route name="auth" pattern="^/auth" output_type="users">
+
+				<!-- User Account -->
+				<route name=".account" pattern="/account$" content="Auth" chain="Account" />
+				<route name=".login" pattern="/login$" content="Auth" chain="Login" />
+				<route name=".register" pattern="/register$" content="Auth" chain="Register" />
+				<route name=".register.verify.email" pattern="/register/verify/email/(code:[\w\d]+)$" content="Auth" chain="VerifyRegister" />
+				<route name=".register.verify.whatsapp" pattern="/register/verify/whatsapp$" content="Auth" chain="VerifyRegister" />
+				<route name=".register.verify.telegram" pattern="/register/verify/telegram$" content="Auth" chain="VerifyRegister" />
+				<route name=".register.telegram.hook" pattern="/register/verify/telegram/(code:[\w\d\W\-]+)$" content="Auth" chain="VerifyTelegram" output_type="json" />
+				<route name=".register.verify" pattern="/register/verify$" content="Auth" chain="VerifyRegister" />
+				<route name=".login.verify" pattern="/login/verify$" content="Auth" chain="VerifyLogin" />
+				<route name=".logout" pattern="/logout$" content="Auth" chain="Logout" />
+				<route name=".forgotpassword" pattern="/forgot-password$" content="Auth" chain="ForgotPassword" />
+				<route name=".resetpassword" pattern="/reset-password/(code:[\w\d]+)$" content="Auth" chain="ResetPassword" />
+            </route>
+
+			<route name="yf" pattern="^/yf">
+
+				<!-- Static Content -->
+				<route name=".javascript" pattern="/youdsframework.js" content="DefaultContent.Static" chain="JavaScript" output_type="javascript" />
+				<route name=".css" pattern="/youdsframework.css" content="DefaultContent/Static" chain="Css" output_type="css" />
+				<route name=".pushnotifications" pattern="/push-notifications">
+					<route name=".subscribe" pattern="/subscribe$" content="DefaultContent/PushNotifications" chain="Subscribe" output_type="json" />
+				</route>
+			</route>
+		</routes>
+	</ae:configuration>
+	<ae:configuration context="console">
+		<routes>
+			<!-- Always load `php console.php content:chain` from CLI -->
+			<route name="systemRunChain" pattern="(content:[\w\d\_\.\/]+):(chain:[\w\d\_\.\/]+)" content="${content}" chain="${chain}" />
+		</routes>
+	</ae:configuration>
+	
+</ae:configurations>

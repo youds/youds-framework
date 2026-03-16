@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * Data file for timezone "Africa/Monrovia".
+ * Compiled from olson file "(unknown)", version (unknown).
+ *
+ * @package    Youds Framework - https://framework.youds.com
+ * @subpackage translation
+ *
+ *
+ * @since      0.1
+ *
+ * @version    $Id$
+ */
+
+return array (
+  'types' => 
+  array (
+    0 => 
+    array (
+      'rawOffset' => -2588,
+      'dstOffset' => 0,
+      'name' => 'MMT',
+    ),
+    1 => 
+    array (
+      'rawOffset' => -2670,
+      'dstOffset' => 0,
+      'name' => 'LRT',
+    ),
+    2 => 
+    array (
+      'rawOffset' => 0,
+      'dstOffset' => 0,
+      'name' => 'GMT',
+    ),
+  ),
+  'rules' => 
+  array (
+    0 => 
+    array (
+      'time' => -2776979812,
+      'type' => 0,
+    ),
+    1 => 
+    array (
+      'time' => -1604359012,
+      'type' => 1,
+    ),
+    2 => 
+    array (
+      'time' => 73529070,
+      'type' => 2,
+    ),
+  ),
+  'finalRule' => 
+  array (
+    'type' => 'static',
+    'name' => 'GMT',
+    'offset' => 0,
+    'startYear' => 1973,
+  ),
+  'source' => '(unknown)',
+  'version' => '(unknown)',
+  'name' => 'Africa/Monrovia',
+);
+
+?>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:envelope="http://framework.youds.com/xml/config/global/envelope"
+	xmlns:types="http://framework.youds.com/xml/config/global/types"
+	xmlns="http://framework.youds.com/xml/config/parts/integrations"
+	targetNamespace="http://framework.youds.com/xml/config/parts/integrations"
+	elementFormDefault="qualified"
+	version="$Id$">
+
+	<xs:import namespace="http://framework.youds.com/xml/config/global/types"
+	           schemaLocation="../_types.xsd" />
+	<xs:import namespace="http://framework.youds.com/xml/config/global/envelope"
+	           schemaLocation="../_envelope.xsd" />
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace"
+	           schemaLocation="../vendor/http/www.w3.org/XML/1998/namespace/2009-01.xsd" />
+
+	
+	<xs:complexType name="text" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+
+
+	
+	<!-- Two Factor Authentication -->
+	<xs:complexType name="privateKey" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+	
+	<xs:complexType name="publicKey" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+	
+	<xs:complexType name="username" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+	
+	<xs:complexType name="password" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+	
+	<xs:complexType name="from" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+	
+	<xs:complexType name="sender" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+	
+	<xs:complexType name="url" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+	
+	<xs:complexType name="key" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+
+	<xs:complexType name="account" mixed="true">
+		<xs:all>
+			<xs:element name="sender" type="sender" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="from" type="from" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="host" type="text" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="port" type="text" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="username" type="username" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="password" type="password" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="encryption" type="text" minOccurs="0" maxOccurs="1"/>
+		</xs:all>
+
+		<xs:attribute name="name" type="xs:string"/>
+	</xs:complexType>
+
+	<xs:complexType name="email" mixed="true">
+		<xs:sequence>
+			<xs:element name="account" type="account" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:group name="email">
+		<xs:choice>
+			<xs:element name="email" type="email"
+						minOccurs="0"/>
+			<xs:element name="account" type="account"
+						minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:group>
+
+
+	<xs:complexType name="twofactor">
+		<xs:sequence>
+			<xs:element name="provider" type="provider"
+			            maxOccurs="unbounded" />		
+		</xs:sequence>
+		<xs:attribute name="prefix" type="xs:string" />
+	</xs:complexType>
+	
+	<xs:group name="twofactor">
+		<xs:choice>
+			<xs:element name="twofactor" type="twofactor"
+			            minOccurs="0" />
+			<xs:element name="provider" type="provider"
+			            minOccurs="0" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Google reCaptcha -->
+	<xs:complexType name="siteKey" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+
+	<xs:complexType name="secretKey" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+
+
+	<xs:complexType name="recaptcha" mixed="true">
+		<xs:sequence>
+			<xs:element name="siteKey" type="siteKey" maxOccurs="unbounded" />
+			<xs:element name="secretKey" type="secretKey" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:group name="recaptcha">
+		<xs:choice>
+			<xs:element name="recaptcha" type="recaptcha"
+			            minOccurs="0" />
+			<xs:element name="provider" type="provider"
+			            minOccurs="0" />
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Transit -->	
+	<xs:complexType name="parameter" mixed="true">
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	
+	<xs:complexType name="channel" mixed="true">
+		<xs:sequence>
+			<xs:element name="parameter" type="parameter" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	
+	<xs:complexType name="channels" mixed="true">
+		<xs:sequence>
+			<xs:element name="channel" type="channel" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="provider" mixed="true">
+		<xs:sequence>
+			<xs:element name="parameter" type="parameter" maxOccurs="unbounded" />
+			<xs:element name="channels" type="channels" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+	
+	<xs:complexType name="transit" mixed="true">
+		<xs:sequence>
+			<xs:element name="provider" type="provider" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<!-- SEO -->	
+	<xs:complexType name="login" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+
+
+
+	<xs:complexType name="seo" mixed="true">
+		<xs:sequence>
+			<xs:element name="login" type="login" maxOccurs="unbounded" />
+			<xs:element name="password" type="password" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:group name="seo">
+		<xs:choice>
+			<xs:element name="seo" type="seo"
+			            minOccurs="0" />
+			<xs:element name="provider" type="provider"
+			            minOccurs="0" />
+		</xs:choice>
+	</xs:group>
+
+	
+	<!-- Configuration -->
+	<xs:group name="configuration">
+		<xs:sequence>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded" >
+				<xs:element name="email" type="email"
+							maxOccurs="unbounded"/>
+				<xs:element name="recaptcha" type="recaptcha"
+				            maxOccurs="unbounded" />
+				<xs:element name="transit" type="transit"
+				            maxOccurs="unbounded" />
+				<xs:element name="seo" type="seo"
+				            maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:sequence>
+	</xs:group>
+
+</xs:schema>

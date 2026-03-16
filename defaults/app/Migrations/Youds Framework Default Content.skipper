@@ -1,0 +1,378 @@
+<?xml version="1.0"?>
+<skipper version="3.3.7.1828" mvc="Laravel" orm="Laravel" name="Youds Framework Default Content" uuid="50324701-00ae-4095-ba6c-7c60a9858c50">
+  <orm-attributes>
+    <attribute name="migrations-path">database/migrations</attribute>
+  </orm-attributes>
+  <module name="\Application module" local-name="Application module" namespace="\Core\Models\Orm" local-namespace="Core\Models\Orm" export-format="Laravel" export-path="." uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0">
+    <entity name="\Core\Models\Orm\Auth\User" local-name="User" namespace="\Core\Models\Orm\Auth" local-namespace="Auth" uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe">
+      <field name="id" type="bigInteger" required="true" unique="true" primary="true" unsigned="true" auto-increment="true" uuid="096afec8-aa0b-448f-9b62-2b7a291aa387"/>
+      <field name="name" type="string" size="255" uuid="8a4334a4-308c-4283-a353-d9478c316431"/>
+      <field name="email" type="string" size="255" uuid="70ee5b61-4bb7-4a0c-9910-f66c27304c60"/>
+      <field name="password" type="string" size="255" uuid="4fdaded3-669b-4120-a8fc-52cf82a4dfbb"/>
+      <field name="mobile" type="string" size="255" uuid="c21c761e-299c-4cee-ba60-dd35ce022d3a"/>
+      <field name="admin" type="string" size="255" uuid="43f342f0-5f46-42e9-be1a-fb2c82c00366"/>
+      <field name="lastLogin" type="timestamp" default="'0000-00-00 00:00:00'" required="true" uuid="2d0c7d11-d47f-4036-a062-ee1b20d3d161"/>
+      <field name="forgotPassword" type="string" uuid="1966d413-a98b-48e6-bb8f-86465c2cd350"/>
+      <field name="forgotPasswordTime" type="string" uuid="6ff0827f-7229-4c24-a5c0-683ff885ba30"/>
+      <field name="created_at" type="timestamp" uuid="33193a9e-2cae-4a40-abea-1fe62a0ec2df"/>
+      <field name="updated_at" type="timestamp" uuid="208f49e9-59d9-47ad-99eb-3d273ae26b72"/>
+      <orm-attributes>
+        <attribute name="table">users</attribute>
+      </orm-attributes>
+    </entity>
+    <entity name="\Core\Models\Orm\Auth\User\Log" local-name="Log" namespace="\Core\Models\Orm\Auth\User" local-namespace="Auth\User" uuid="1304e62b-83e2-42f9-a03b-14de9111445d">
+      <field name="id" type="bigInteger" required="true" unique="true" primary="true" unsigned="true" auto-increment="true" uuid="c1420f5c-f600-4170-95ff-37341b64ca51"/>
+      <field name="userId" type="bigInteger" unsigned="true" uuid="e2b77836-7d3f-48d3-ab5d-f235251130e7"/>
+      <field name="action" type="enum" enum-values="'login', 'logout', 'create', 'delete', 'view','update'" uuid="c511987c-b4ee-4da8-b726-7f81fad6f24b"/>
+      <field name="message" type="text" uuid="9b30c9de-94c7-4e47-9b0f-9a3f77caf2b2"/>
+      <field name="created_at" type="timestamp" uuid="887ea76e-2aea-4ce4-ac8b-b5af0b8abfb6"/>
+      <field name="updated_at" type="timestamp" uuid="cbc57b5a-1c0d-4660-8003-7a6941b0c4f6"/>
+    </entity>
+    <association from="\Core\Models\Orm\Auth\User\Log" to="\Core\Models\Orm\Auth\User" caption="User UserLogs" owner-alias="userLogs" inverse-alias="user" many-owner="true" many-inverse="false" uuid="7b53aa8c-c442-4e2b-864d-0806b896f355">
+      <association-field from="userId" to="id" uuid="4bc6aa4a-4e0d-407d-bd94-bd234c2057e1"/>
+    </association>
+    <entity name="\Core\Models\Orm\Auth\Legal" local-name="Legal" namespace="\Core\Models\Orm\Auth" local-namespace="Auth" uuid="6b1db15e-558c-44ce-b21d-806ed7727da7">
+      <field name="id" type="bigInteger" required="true" unique="true" primary="true" unsigned="true" auto-increment="true" uuid="66e84679-5d6b-4ecd-b6b1-c66514dab67d"/>
+      <field name="document" type="string" uuid="9ac6f309-0577-4c6e-9cea-b5bf1afc0d84"/>
+      <field name="created_at" type="timestamp" uuid="d945ed94-8798-4a12-a670-36dca0c02658"/>
+      <field name="updated_at" type="timestamp" uuid="6c63f7ba-90d9-4009-87ed-d3b13e134bb8"/>
+    </entity>
+    <entity name="\Core\Models\Orm\Auth\User\Tracking" local-name="Tracking" namespace="\Core\Models\Orm\Auth\User" local-namespace="Auth\User" uuid="be025758-b5cc-495e-8438-89a7679181ce">
+      <field name="id" type="bigInteger" required="true" unique="true" primary="true" unsigned="true" auto-increment="true" uuid="de513df6-f4be-411b-9b87-d4b2b64afd8a"/>
+      <field name="userId" type="bigInteger" unsigned="true" uuid="e6d930e7-7ded-45cf-b014-261645b2a267"/>
+      <field name="ip" type="string" uuid="4e01b9c4-7bb4-4f77-aad3-141a5fa386b5"/>
+      <field name="userAgent" type="string" uuid="68ce81b9-d64f-41e0-bb37-033bb08aced0"/>
+      <field name="verified" type="boolean" uuid="79367a9f-d9a2-49f0-80ab-e50393a8c5f5"/>
+      <field name="verifiedBy" type="enum" enum-values="'email', 'sms', 'whatsapp',  'authenticator', 'telegram'" uuid="6c852d09-2034-402d-8a97-79d9da34f9fc"/>
+      <field name="created_at" type="timestamp" uuid="a9488058-6181-4e1c-a3b9-cccfcbbeaebc"/>
+      <field name="updated_at" type="timestamp" uuid="f57bacc5-b02b-4f75-9b5c-762ce2656c03"/>
+    </entity>
+    <association from="\Core\Models\Orm\Auth\User\Tracking" to="\Core\Models\Orm\Auth\User" caption="User UserTrackings" owner-alias="userTrackings" inverse-alias="user" many-owner="true" many-inverse="false" uuid="f499a8d7-ce25-4470-8b93-7c3ae0f7977f">
+      <association-field from="userId" to="id" uuid="8a16f597-fb7c-4456-9fbe-4879d3a382a4"/>
+    </association>
+    <entity name="\Core\Models\Orm\Auth\User\Verified" local-name="Verified" namespace="\Core\Models\Orm\Auth\User" local-namespace="Auth\User" uuid="da691fab-c362-4b95-8eb5-85135c1f8b1c">
+      <field name="id" type="bigInteger" required="true" unique="true" primary="true" unsigned="true" auto-increment="true" uuid="1ea18c73-eaa1-4bcd-add3-6b9b01d746b5"/>
+      <field name="userId" type="bigInteger" unsigned="true" uuid="e6cb8934-7fe4-4fa9-947c-c6de939be5a8"/>
+      <field name="method" type="enum" enum-values="'SMS', 'Email', 'WhatsApp', 'Telegram'" uuid="f46940eb-57f3-44d9-9422-ff46619a9389"/>
+      <field name="verified" type="boolean" uuid="d1601980-c5b9-4ed2-b08c-b03a326629f6"/>
+      <field name="created_at" type="timestamp" uuid="5c59aa2d-699c-4a5d-b6d2-b96341da1b71"/>
+      <field name="updated_at" type="timestamp" uuid="ccd7abae-db47-4db5-946c-669699c428cf"/>
+    </entity>
+    <association from="\Core\Models\Orm\Auth\User\Verified" to="\Core\Models\Orm\Auth\User" caption="User Verifieds" owner-alias="verifieds" inverse-alias="user" many-owner="true" many-inverse="false" uuid="93158604-8196-432f-986e-0071091b0064">
+      <association-field from="userId" to="id" uuid="f80b60cc-bca9-4211-aa8a-0c9531b963f9"/>
+    </association>
+    <entity name="\Core\Models\Orm\Auth\Legal\Verified" local-name="Verified" namespace="\Core\Models\Orm\Auth\Legal" local-namespace="Auth\Legal" uuid="28777c86-4a1d-41ab-81ca-f64b93e6b114">
+      <field name="id" type="bigInteger" required="true" unique="true" primary="true" unsigned="true" auto-increment="true" uuid="77e43cbd-11ff-4928-aa50-9ab66abb6939"/>
+      <field name="userId" type="bigInteger" unsigned="true" uuid="114d4555-bc02-45a9-89df-116036fbc35c"/>
+      <field name="legalId" type="bigInteger" unsigned="true" uuid="360cc0d3-32d8-4f0e-a984-11e4877fb9fe"/>
+      <field name="verified" type="boolean" uuid="ac06b57e-5576-4795-b79e-6acaeb880cb8"/>
+      <field name="created_at" type="timestamp" uuid="bf4fee45-d212-41aa-9f86-73505631f493"/>
+      <field name="updated_at" type="timestamp" uuid="209ccf99-1827-4513-8902-bd55c392218f"/>
+    </entity>
+    <association from="\Core\Models\Orm\Auth\Legal\Verified" to="\Core\Models\Orm\Auth\User" caption="User Verifieds" owner-alias="verified" inverse-alias="user" many-owner="true" many-inverse="false" uuid="e82bae6e-120a-46e9-8634-1c120a8e6842">
+      <association-field from="userId" to="id" uuid="f02c7a51-a3c9-4144-b460-dd41f2d961b2"/>
+    </association>
+    <association from="\Core\Models\Orm\Auth\Legal\Verified" to="\Core\Models\Orm\Auth\Legal" caption="Legal Verifieds" owner-alias="verified" inverse-alias="legal" many-owner="true" many-inverse="false" uuid="bb905d6a-49fe-4965-a387-697fa9e806b1">
+      <association-field from="legalId" to="id" uuid="29151df8-d888-453b-b58c-4125a55c1727"/>
+    </association>
+    <migrations version="1.0">
+      <revision uuid="5ae3e8a2-43b9-4055-90ea-55279a783a0a" date="2026-01-29 11:18:20.353042" exportable="true">
+        <element action="add" uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0" type="module">
+          <property name="export-format" value="Laravel"/>
+          <property name="export-path" value="."/>
+          <property name="local-name" value="Application module"/>
+          <property name="local-namespace" value="Core\Models\Orm"/>
+          <property name="name" value="\Application module"/>
+          <property name="namespace" value="\Core\Models\Orm"/>
+        </element>
+        <element action="add" uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" parent-uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0" type="entity">
+          <property name="local-name" value="User"/>
+          <property name="local-namespace" value="Auth"/>
+          <property name="name" value="\Core\Models\Orm\Auth\User"/>
+          <property name="namespace" value="\Core\Models\Orm\Auth"/>
+          <property name="table" value="users"/>
+        </element>
+        <element action="add" uuid="1304e62b-83e2-42f9-a03b-14de9111445d" parent-uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0" type="entity">
+          <property name="local-name" value="Log"/>
+          <property name="local-namespace" value="Auth\User"/>
+          <property name="name" value="\Core\Models\Orm\Auth\User\Log"/>
+          <property name="namespace" value="\Core\Models\Orm\Auth\User"/>
+        </element>
+        <element action="add" uuid="6b1db15e-558c-44ce-b21d-806ed7727da7" parent-uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0" type="entity">
+          <property name="local-name" value="Legal"/>
+          <property name="local-namespace" value="Auth\User"/>
+          <property name="name" value="\Core\Models\Orm\Auth\User\Legal"/>
+          <property name="namespace" value="\Core\Models\Orm\Auth\User"/>
+        </element>
+        <element action="add" uuid="be025758-b5cc-495e-8438-89a7679181ce" parent-uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0" type="entity">
+          <property name="local-name" value="Tracking"/>
+          <property name="local-namespace" value="Auth\User"/>
+          <property name="name" value="\Core\Models\Orm\Auth\User\Tracking"/>
+          <property name="namespace" value="\Core\Models\Orm\Auth\User"/>
+        </element>
+        <element action="add" uuid="da691fab-c362-4b95-8eb5-85135c1f8b1c" parent-uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0" type="entity">
+          <property name="local-name" value="Verified"/>
+          <property name="local-namespace" value="Auth\User"/>
+          <property name="name" value="\Core\Models\Orm\Auth\User\Verified"/>
+          <property name="namespace" value="\Core\Models\Orm\Auth\User"/>
+        </element>
+        <element action="add" uuid="096afec8-aa0b-448f-9b62-2b7a291aa387" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" type="field">
+          <property name="auto-increment" value="true"/>
+          <property name="name" value="id"/>
+          <property name="primary" value="true"/>
+          <property name="required" value="true"/>
+          <property name="type" value="bigInteger"/>
+          <property name="unique" value="true"/>
+          <property name="unsigned" value="true"/>
+        </element>
+        <element action="add" uuid="8a4334a4-308c-4283-a353-d9478c316431" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="096afec8-aa0b-448f-9b62-2b7a291aa387" type="field">
+          <property name="name" value="name"/>
+          <property name="size" value="255"/>
+          <property name="type" value="string"/>
+        </element>
+        <element action="add" uuid="70ee5b61-4bb7-4a0c-9910-f66c27304c60" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="8a4334a4-308c-4283-a353-d9478c316431" type="field">
+          <property name="name" value="email"/>
+          <property name="size" value="255"/>
+          <property name="type" value="string"/>
+        </element>
+        <element action="add" uuid="4fdaded3-669b-4120-a8fc-52cf82a4dfbb" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="70ee5b61-4bb7-4a0c-9910-f66c27304c60" type="field">
+          <property name="name" value="password"/>
+          <property name="size" value="255"/>
+          <property name="type" value="string"/>
+        </element>
+        <element action="add" uuid="c21c761e-299c-4cee-ba60-dd35ce022d3a" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="4fdaded3-669b-4120-a8fc-52cf82a4dfbb" type="field">
+          <property name="name" value="mobile"/>
+          <property name="size" value="255"/>
+          <property name="type" value="string"/>
+        </element>
+        <element action="add" uuid="43f342f0-5f46-42e9-be1a-fb2c82c00366" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="c21c761e-299c-4cee-ba60-dd35ce022d3a" type="field">
+          <property name="name" value="admin"/>
+          <property name="size" value="255"/>
+          <property name="type" value="string"/>
+        </element>
+        <element action="add" uuid="2d0c7d11-d47f-4036-a062-ee1b20d3d161" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="43f342f0-5f46-42e9-be1a-fb2c82c00366" type="field">
+          <property name="default" value="'0000-00-00 00:00:00'"/>
+          <property name="name" value="lastLogin"/>
+          <property name="required" value="true"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="61a6af88-8eee-4d9e-8839-0ad038a0a071" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="2d0c7d11-d47f-4036-a062-ee1b20d3d161" type="field">
+          <property name="name" value="userLegalId"/>
+          <property name="type" value="bigInteger"/>
+          <property name="unsigned" value="true"/>
+        </element>
+        <element action="add" uuid="e456629d-f8ea-435f-a72a-fc1e6df259dc" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="61a6af88-8eee-4d9e-8839-0ad038a0a071" type="field">
+          <property name="name" value="verified"/>
+          <property name="type" value="boolean"/>
+        </element>
+        <element action="add" uuid="2e46ec3a-0585-4340-b5ec-644f2ecbae83" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="e456629d-f8ea-435f-a72a-fc1e6df259dc" type="field">
+          <property name="enum-values" value="'EMAIL'"/>
+          <property name="name" value="verifiedMethod"/>
+          <property name="size" value="5"/>
+          <property name="type" value="enum"/>
+        </element>
+        <element action="add" uuid="98fc5f2c-1d74-437e-ae9f-4e3b61ea1783" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="2e46ec3a-0585-4340-b5ec-644f2ecbae83" type="field">
+          <property name="name" value="verifiedTime"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="1966d413-a98b-48e6-bb8f-86465c2cd350" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="98fc5f2c-1d74-437e-ae9f-4e3b61ea1783" type="field">
+          <property name="name" value="forgotPassword"/>
+          <property name="type" value="string"/>
+        </element>
+        <element action="add" uuid="6ff0827f-7229-4c24-a5c0-683ff885ba30" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="1966d413-a98b-48e6-bb8f-86465c2cd350" type="field">
+          <property name="name" value="forgotPasswordTime"/>
+          <property name="type" value="string"/>
+        </element>
+        <element action="add" uuid="33193a9e-2cae-4a40-abea-1fe62a0ec2df" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="6ff0827f-7229-4c24-a5c0-683ff885ba30" type="field">
+          <property name="name" value="created_at"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="208f49e9-59d9-47ad-99eb-3d273ae26b72" parent-uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" sibling-uuid="33193a9e-2cae-4a40-abea-1fe62a0ec2df" type="field">
+          <property name="name" value="updated_at"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="c1420f5c-f600-4170-95ff-37341b64ca51" parent-uuid="1304e62b-83e2-42f9-a03b-14de9111445d" type="field">
+          <property name="auto-increment" value="true"/>
+          <property name="name" value="id"/>
+          <property name="primary" value="true"/>
+          <property name="required" value="true"/>
+          <property name="type" value="bigInteger"/>
+          <property name="unique" value="true"/>
+          <property name="unsigned" value="true"/>
+        </element>
+        <element action="add" uuid="e2b77836-7d3f-48d3-ab5d-f235251130e7" parent-uuid="1304e62b-83e2-42f9-a03b-14de9111445d" sibling-uuid="c1420f5c-f600-4170-95ff-37341b64ca51" type="field">
+          <property name="name" value="userId"/>
+          <property name="type" value="bigInteger"/>
+          <property name="unsigned" value="true"/>
+        </element>
+        <element action="add" uuid="c511987c-b4ee-4da8-b726-7f81fad6f24b" parent-uuid="1304e62b-83e2-42f9-a03b-14de9111445d" sibling-uuid="e2b77836-7d3f-48d3-ab5d-f235251130e7" type="field">
+          <property name="enum-values" value="'login', 'logout', 'create', 'delete', 'view','update'"/>
+          <property name="name" value="action"/>
+          <property name="type" value="enum"/>
+        </element>
+        <element action="add" uuid="9b30c9de-94c7-4e47-9b0f-9a3f77caf2b2" parent-uuid="1304e62b-83e2-42f9-a03b-14de9111445d" sibling-uuid="c511987c-b4ee-4da8-b726-7f81fad6f24b" type="field">
+          <property name="name" value="message"/>
+          <property name="type" value="text"/>
+        </element>
+        <element action="add" uuid="887ea76e-2aea-4ce4-ac8b-b5af0b8abfb6" parent-uuid="1304e62b-83e2-42f9-a03b-14de9111445d" sibling-uuid="9b30c9de-94c7-4e47-9b0f-9a3f77caf2b2" type="field">
+          <property name="name" value="created_at"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="cbc57b5a-1c0d-4660-8003-7a6941b0c4f6" parent-uuid="1304e62b-83e2-42f9-a03b-14de9111445d" sibling-uuid="887ea76e-2aea-4ce4-ac8b-b5af0b8abfb6" type="field">
+          <property name="name" value="updated_at"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="66e84679-5d6b-4ecd-b6b1-c66514dab67d" parent-uuid="6b1db15e-558c-44ce-b21d-806ed7727da7" type="field">
+          <property name="auto-increment" value="true"/>
+          <property name="name" value="id"/>
+          <property name="primary" value="true"/>
+          <property name="required" value="true"/>
+          <property name="type" value="bigInteger"/>
+          <property name="unique" value="true"/>
+          <property name="unsigned" value="true"/>
+        </element>
+        <element action="add" uuid="9ac6f309-0577-4c6e-9cea-b5bf1afc0d84" parent-uuid="6b1db15e-558c-44ce-b21d-806ed7727da7" sibling-uuid="66e84679-5d6b-4ecd-b6b1-c66514dab67d" type="field">
+          <property name="name" value="document"/>
+          <property name="type" value="string"/>
+        </element>
+        <element action="add" uuid="d945ed94-8798-4a12-a670-36dca0c02658" parent-uuid="6b1db15e-558c-44ce-b21d-806ed7727da7" sibling-uuid="9ac6f309-0577-4c6e-9cea-b5bf1afc0d84" type="field">
+          <property name="name" value="created_at"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="6c63f7ba-90d9-4009-87ed-d3b13e134bb8" parent-uuid="6b1db15e-558c-44ce-b21d-806ed7727da7" sibling-uuid="d945ed94-8798-4a12-a670-36dca0c02658" type="field">
+          <property name="name" value="updated_at"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="de513df6-f4be-411b-9b87-d4b2b64afd8a" parent-uuid="be025758-b5cc-495e-8438-89a7679181ce" type="field">
+          <property name="auto-increment" value="true"/>
+          <property name="name" value="id"/>
+          <property name="primary" value="true"/>
+          <property name="required" value="true"/>
+          <property name="type" value="bigInteger"/>
+          <property name="unique" value="true"/>
+          <property name="unsigned" value="true"/>
+        </element>
+        <element action="add" uuid="e6d930e7-7ded-45cf-b014-261645b2a267" parent-uuid="be025758-b5cc-495e-8438-89a7679181ce" sibling-uuid="de513df6-f4be-411b-9b87-d4b2b64afd8a" type="field">
+          <property name="name" value="userId"/>
+          <property name="type" value="bigInteger"/>
+          <property name="unsigned" value="true"/>
+        </element>
+        <element action="add" uuid="68ce81b9-d64f-41e0-bb37-033bb08aced0" parent-uuid="be025758-b5cc-495e-8438-89a7679181ce" sibling-uuid="e6d930e7-7ded-45cf-b014-261645b2a267" type="field">
+          <property name="name" value="userAgent"/>
+          <property name="type" value="string"/>
+        </element>
+        <element action="add" uuid="79367a9f-d9a2-49f0-80ab-e50393a8c5f5" parent-uuid="be025758-b5cc-495e-8438-89a7679181ce" sibling-uuid="68ce81b9-d64f-41e0-bb37-033bb08aced0" type="field">
+          <property name="name" value="verified"/>
+          <property name="type" value="boolean"/>
+        </element>
+        <element action="add" uuid="6c852d09-2034-402d-8a97-79d9da34f9fc" parent-uuid="be025758-b5cc-495e-8438-89a7679181ce" sibling-uuid="79367a9f-d9a2-49f0-80ab-e50393a8c5f5" type="field">
+          <property name="enum-values" value="'email', 'sms', 'whatsapp',  'authenticator', 'telegram'"/>
+          <property name="name" value="verifiedBy"/>
+          <property name="type" value="enum"/>
+        </element>
+        <element action="add" uuid="a9488058-6181-4e1c-a3b9-cccfcbbeaebc" parent-uuid="be025758-b5cc-495e-8438-89a7679181ce" sibling-uuid="6c852d09-2034-402d-8a97-79d9da34f9fc" type="field">
+          <property name="name" value="created_at"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="f57bacc5-b02b-4f75-9b5c-762ce2656c03" parent-uuid="be025758-b5cc-495e-8438-89a7679181ce" sibling-uuid="a9488058-6181-4e1c-a3b9-cccfcbbeaebc" type="field">
+          <property name="name" value="updated_at"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="1ea18c73-eaa1-4bcd-add3-6b9b01d746b5" parent-uuid="da691fab-c362-4b95-8eb5-85135c1f8b1c" type="field">
+          <property name="auto-increment" value="true"/>
+          <property name="name" value="id"/>
+          <property name="primary" value="true"/>
+          <property name="required" value="true"/>
+          <property name="type" value="bigInteger"/>
+          <property name="unique" value="true"/>
+          <property name="unsigned" value="true"/>
+        </element>
+        <element action="add" uuid="e6cb8934-7fe4-4fa9-947c-c6de939be5a8" parent-uuid="da691fab-c362-4b95-8eb5-85135c1f8b1c" sibling-uuid="1ea18c73-eaa1-4bcd-add3-6b9b01d746b5" type="field">
+          <property name="name" value="userId"/>
+          <property name="type" value="bigInteger"/>
+          <property name="unsigned" value="true"/>
+        </element>
+        <element action="add" uuid="f46940eb-57f3-44d9-9422-ff46619a9389" parent-uuid="da691fab-c362-4b95-8eb5-85135c1f8b1c" sibling-uuid="e6cb8934-7fe4-4fa9-947c-c6de939be5a8" type="field">
+          <property name="enum-values" value="'SMS', 'Email', 'WhatsApp', 'Telegram'"/>
+          <property name="name" value="method"/>
+          <property name="type" value="enum"/>
+        </element>
+        <element action="add" uuid="d1601980-c5b9-4ed2-b08c-b03a326629f6" parent-uuid="da691fab-c362-4b95-8eb5-85135c1f8b1c" sibling-uuid="f46940eb-57f3-44d9-9422-ff46619a9389" type="field">
+          <property name="name" value="verified"/>
+          <property name="type" value="boolean"/>
+        </element>
+        <element action="add" uuid="5c59aa2d-699c-4a5d-b6d2-b96341da1b71" parent-uuid="da691fab-c362-4b95-8eb5-85135c1f8b1c" sibling-uuid="d1601980-c5b9-4ed2-b08c-b03a326629f6" type="field">
+          <property name="name" value="created_at"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="ccd7abae-db47-4db5-946c-669699c428cf" parent-uuid="da691fab-c362-4b95-8eb5-85135c1f8b1c" sibling-uuid="5c59aa2d-699c-4a5d-b6d2-b96341da1b71" type="field">
+          <property name="name" value="updated_at"/>
+          <property name="type" value="timestamp"/>
+        </element>
+        <element action="add" uuid="42ad155a-38f5-4a44-99b3-a6f6c8334b24" parent-uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0" type="association">
+          <property name="from" value="\Core\Models\Orm\Auth\User"/>
+          <property name="inverse-alias" value="userLegal"/>
+          <property name="many-inverse" value="false"/>
+          <property name="many-owner" value="true"/>
+          <property name="owner-alias" value="users"/>
+          <property name="to" value="\Core\Models\Orm\Auth\User\Legal"/>
+        </element>
+        <element action="add" uuid="7b53aa8c-c442-4e2b-864d-0806b896f355" parent-uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0" type="association">
+          <property name="from" value="\Core\Models\Orm\Auth\User\Log"/>
+          <property name="inverse-alias" value="user"/>
+          <property name="many-inverse" value="false"/>
+          <property name="many-owner" value="true"/>
+          <property name="owner-alias" value="userLogs"/>
+          <property name="to" value="\Core\Models\Orm\Auth\User"/>
+        </element>
+        <element action="add" uuid="f499a8d7-ce25-4470-8b93-7c3ae0f7977f" parent-uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0" type="association">
+          <property name="from" value="\Core\Models\Orm\Auth\User\Tracking"/>
+          <property name="inverse-alias" value="user"/>
+          <property name="many-inverse" value="false"/>
+          <property name="many-owner" value="true"/>
+          <property name="owner-alias" value="userTrackings"/>
+          <property name="to" value="\Core\Models\Orm\Auth\User"/>
+        </element>
+        <element action="add" uuid="93158604-8196-432f-986e-0071091b0064" parent-uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0" type="association">
+          <property name="from" value="\Core\Models\Orm\Auth\User\Verified"/>
+          <property name="inverse-alias" value="user"/>
+          <property name="many-inverse" value="false"/>
+          <property name="many-owner" value="true"/>
+          <property name="owner-alias" value="verifieds"/>
+          <property name="to" value="\Core\Models\Orm\Auth\User"/>
+        </element>
+        <element action="add" uuid="7e409bd1-3943-450a-bb67-d1e0cd236c6b" parent-uuid="42ad155a-38f5-4a44-99b3-a6f6c8334b24" type="association-field">
+          <property name="from" value="userLegalId"/>
+          <property name="to" value="id"/>
+        </element>
+        <element action="add" uuid="4bc6aa4a-4e0d-407d-bd94-bd234c2057e1" parent-uuid="7b53aa8c-c442-4e2b-864d-0806b896f355" type="association-field">
+          <property name="from" value="userId"/>
+          <property name="to" value="id"/>
+        </element>
+        <element action="add" uuid="8a16f597-fb7c-4456-9fbe-4879d3a382a4" parent-uuid="f499a8d7-ce25-4470-8b93-7c3ae0f7977f" type="association-field">
+          <property name="from" value="userId"/>
+          <property name="to" value="id"/>
+        </element>
+        <element action="add" uuid="f80b60cc-bca9-4211-aa8a-0c9531b963f9" parent-uuid="93158604-8196-432f-986e-0071091b0064" type="association-field">
+          <property name="from" value="userId"/>
+          <property name="to" value="id"/>
+        </element>
+      </revision>
+    </migrations>
+  </module>
+  <visual-data>
+    <association uuid="7b53aa8c-c442-4e2b-864d-0806b896f355" color="#969696"/>
+    <association uuid="93158604-8196-432f-986e-0071091b0064" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="16" color="#969696"/>
+    <association uuid="bb905d6a-49fe-4965-a387-697fa9e806b1" color="#969696"/>
+    <association uuid="e82bae6e-120a-46e9-8634-1c120a8e6842" color="#969696"/>
+    <association uuid="f499a8d7-ce25-4470-8b93-7c3ae0f7977f" color="#969696"/>
+    <entity uuid="1304e62b-83e2-42f9-a03b-14de9111445d" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="611" position-y="414" size-x="0" size-x2="119" size-y="0" size-y2="101"/>
+    <entity uuid="28777c86-4a1d-41ab-81ca-f64b93e6b114" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="162" position-y="414" size-x="0" size-x2="119" size-y="0" size-y2="101"/>
+    <entity uuid="6b1db15e-558c-44ce-b21d-806ed7727da7" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="228" position-y="59" size-x="0" size-x2="119" size-y="0" size-y2="73"/>
+    <entity uuid="8b1fdb9e-141b-4133-9a7d-c2b12754cebe" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="475" position-y="67" size-x="0" size-x2="137" size-y="0" size-y2="171"/>
+    <entity uuid="be025758-b5cc-495e-8438-89a7679181ce" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="468" position-y="414" size-x="0" size-x2="119" size-y="0" size-y2="115"/>
+    <entity uuid="da691fab-c362-4b95-8eb5-85135c1f8b1c" bg-color="#FFFFFF" hdr-color="#D2D2D2" position-x="320" position-y="414" size-x="0" size-x2="119" size-y="0" size-y2="101"/>
+    <module uuid="ddc1a37e-c652-456e-b092-d9abcb2988a0" bg-color="#FDEBEF" position-x="68" position-y="60" size-x="11" size-x2="916" size-y="22" size-y2="744"/>
+    <project uuid="50324701-00ae-4095-ba6c-7c60a9858c50" size-x="0" size-x2="1027" size-y="0" size-y2="866"/>
+  </visual-data>
+</skipper>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:envelope="http://framework.youds.com/xml/config/global/envelope"
+	xmlns:types="http://framework.youds.com/xml/config/global/types"
+	xmlns="http://framework.youds.com/xml/config/parts/chain"
+	targetNamespace="http://framework.youds.com/xml/config/parts/chain"
+	elementFormDefault="qualified"
+	version="$Id$">
+
+	<xs:import namespace="http://framework.youds.com/xml/config/global/types"
+	           schemaLocation="../_types.xsd" />
+	<xs:import namespace="http://framework.youds.com/xml/config/global/envelope"
+	           schemaLocation="../_envelope.xsd" />
+
+	<!-- Unfortunately XML Schema does not have the capability to restrict mixed
+	     chain, so this is the best we can do. In Relax NG, the syntax would
+	     look something like:
+
+	     <choice>
+	       <ref name="envelope:parameters" />
+	       <text />
+	     </choice>
+
+	     Here we allow parameters mixed with text. This might be useful in the
+	     future anyway. -->
+	
+	<!-- Defaults -->
+	<xs:complexType name="default" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="defaults">
+		<xs:sequence>
+			<xs:element name="default" type="setting"
+			            maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="prefix" type="xs:string" />
+	</xs:complexType>
+
+	<xs:group name="defaults">
+		<xs:choice>
+			<xs:element name="defaults" type="settings"
+			            minOccurs="0" />
+			<xs:element name="default" type="setting"
+			            minOccurs="0" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Settings -->
+	<xs:complexType name="setting" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="settings">
+		<xs:sequence>
+			<xs:element name="setting" type="setting"
+			            maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="prefix" type="xs:string" />
+	</xs:complexType>
+
+	<xs:group name="settings">
+		<xs:choice>
+			<xs:element name="settings" type="settings"
+			            minOccurs="0" />
+			<xs:element name="setting" type="setting"
+			            minOccurs="0" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name="chain">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:group ref="defaults" minOccurs="0" maxOccurs="unbounded" />
+				<xs:group ref="settings" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="enabled" type="types:boolean" use="required" />
+	</xs:complexType>
+
+	<xs:group name="configuration">
+		<xs:sequence>
+			<xs:element name="chain" type="chain" />
+		</xs:sequence>
+	</xs:group>
+
+</xs:schema>

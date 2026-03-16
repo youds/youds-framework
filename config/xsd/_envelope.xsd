@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:envelope="http://framework.youds.com/xml/config/global/envelope"
+	xmlns:types="http://framework.youds.com/xml/config/global/types"
+	xmlns:annotations="http://framework.youds.com/xml/config/global/annotations"
+	targetNamespace="http://framework.youds.com/xml/config/global/envelope"
+	elementFormDefault="qualified"
+	version="$Id$">
+
+	<xs:import namespace="http://framework.youds.com/xml/config/global/types"
+	           schemaLocation="_types.xsd" />
+	<xs:import namespace="http://framework.youds.com/xml/config/global/annotations"
+	           schemaLocation="_annotations.xsd" />
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace"
+	           schemaLocation="vendor/http/www.w3.org/XML/1998/namespace/2009-01.xsd" />
+
+	<xs:attribute name="literalize" type="types:boolean" />
+
+	<xs:complexType name="sandbox">
+		<xs:sequence>
+			<xs:any namespace="##any" processContents="lax"
+			        minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="configuration">
+		<xs:attributeGroup ref="annotations:match" />
+		<xs:attributeGroup ref="types:environments" />
+		<xs:anyAttribute namespace="##any" processContents="lax" />
+	</xs:complexType>
+
+	<xs:complexType name="configurations">
+		<xs:sequence>
+			<xs:any namespace="##other" processContents="lax"
+			        minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="sandbox" type="envelope:sandbox"
+			            minOccurs="0" maxOccurs="1" />
+			<xs:element name="configuration" type="envelope:configuration"
+			            minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="parent" type="xs:string" use="optional" />
+		<xs:anyAttribute namespace="##any" processContents="lax" />
+	</xs:complexType>
+
+	<xs:complexType name="parameter" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute name="name" type="xs:string" use="optional" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+
+	<xs:complexType name="parameters">
+		<xs:sequence>
+			<xs:element name="parameter" type="envelope:parameter"
+			            minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:group name="parameters">
+		<xs:choice>
+			<xs:element name="parameters" type="envelope:parameters"
+			            minOccurs="0" maxOccurs="1" />
+			<xs:element name="parameter" type="envelope:parameter"
+			            minOccurs="0" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+
+	<xs:element name="configurations" type="envelope:configurations" />
+
+</xs:schema>

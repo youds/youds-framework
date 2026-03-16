@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+	xmlns:generator="http://framework.youds.com/xml/config/parts/generator"
+	ns="http://framework.youds.com/xml/config/parts/generator"
+	datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+	
+	<include href="_common.rng" />
+	
+	<define name="content-configuration" combine="interleave">
+		<choice>
+			<optional>
+				<element name="generators">
+					<ref name="content-generators" />
+				</element>
+			</optional>
+			<zeroOrMore>
+				<element name="generator">
+					<ref name="content-generator" />
+				</element>
+			</zeroOrMore>
+		</choice>
+	</define>
+	
+	<define name="content-generator">
+		<attribute name="name">
+			<ref name="data-identifier" />
+		</attribute>
+		<data type="string" />
+	</define>
+	
+	<define name="content-generators">
+		<zeroOrMore>
+			<element name="generator">
+				<ref name="content-generator" />
+			</element>
+		</zeroOrMore>
+	</define>
+	
+</grammar>

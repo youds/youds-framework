@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://framework.youds.com/xml/config/parts/validators"
+	xmlns:ae="http://framework.youds.com/xml/config/global/envelope"
+	parent="%core.src_dir%/config/defaults/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators>		
+			
+			<validator class="JsonValidator" required="false">
+				<arguments>
+					<argument>slots</argument>
+				</arguments>
+				<errors>
+					<error>No slots provided.</error>
+				</errors>
+				<ae:parameters>
+					<ae:parameter name="min">1</ae:parameter>
+				</ae:parameters>
+			</validator>
+			
+			<validator class="Validator\Text" required="false">
+				<arguments>
+					<argument>load</argument>
+				</arguments>
+				<errors>
+					<error>Nothing to load.</error>
+				</errors>
+				<ae:parameters>
+					<ae:parameter name="min">1</ae:parameter>
+				</ae:parameters>
+			</validator>
+		
+		</validators>
+		
+	</ae:configuration>
+</ae:configurations>

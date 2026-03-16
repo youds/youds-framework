@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+	xmlns="http://framework.youds.com/xml/config/parts/validators"
+	xmlns:ae="http://framework.youds.com/xml/config/global/envelope"
+	parent="%core.src_dir%/config/defaults/validators.xml"
+>
+	<ae:configuration>
+		
+		<validators method="write">		
+						
+			<validator class="Validator\Email" required="true" >
+				<arguments>
+					<argument>email</argument>
+				</arguments>
+				<errors>
+					<error>The email address is not valid.</error>
+				</errors>
+				<ae:parameters>
+					<ae:parameter name="min">4</ae:parameter>
+				</ae:parameters>
+			</validator>
+		
+			<validator class="Validator\EmailUnique" required="true">
+				<arguments>
+					<argument>email</argument>
+				</arguments>
+				<errors>
+					<error>The email address is already in use.</error>
+				</errors>
+			</validator>
+		
+			<validator class="Validator\Text" required="true" provides="password_char">
+				<arguments>
+					<argument>password</argument>
+				</arguments>
+				<errors>
+					<error>The password must be at least 6 characters long.</error>
+				</errors>
+				<ae:parameters>
+					<ae:parameter name="min">6</ae:parameter>
+				</ae:parameters>
+			</validator>
+		
+			<validator class="Validator\Password" required="true" depends="password_char" provides="password_confirmation">
+				<arguments>
+					<argument>password</argument>
+				</arguments>
+				<errors>
+					<error>The password must contain a number and symbol character.</error>
+				</errors>
+				<ae:parameters>
+					<ae:parameter name="min">6</ae:parameter>
+				</ae:parameters>
+			</validator>
+		
+		
+			<validator class="Validator\Equals" required="true" depends="password_confirmation">
+				<arguments>
+					<argument>confirmPassword</argument>
+				</arguments>
+				<errors>
+					<error>The password must match confirm password.</error>
+				</errors>
+				<ae:parameters>
+					<ae:parameter name="value">password</ae:parameter>
+					<ae:parameter name="asparam">true</ae:parameter>
+				</ae:parameters>
+			</validator>
+		
+		
+		
+		</validators>
+	</ae:configuration>
+</ae:configurations>

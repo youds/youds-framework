@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ae:configurations xmlns="http://framework.youds.com/xml/config/parts/validators" xmlns:ae="http://framework.youds.com/xml/config/global/envelope">
+	
+	<ae:configuration>
+		<validator_definitions>
+			
+			<validator_definition name="and" class="Validator\Andoperator">
+				<ae:parameter name="break">true</ae:parameter>
+			</validator_definition>
+			
+			<validator_definition name="arraylength" class="Validator\Arraylength">
+				<ae:parameter name="min">1</ae:parameter>
+			</validator_definition>
+			
+			<validator_definition name="boolean" class="Validator\Boolean" />
+			
+			<validator_definition name="datetime" class="Validator\DateTime">
+				<ae:parameter name="check">true</ae:parameter>
+			</validator_definition>
+			
+			<validator_definition name="email" class="Validator\Email" />
+			
+			<validator_definition name="equals" class="Validator\Equals" />
+			
+			<validator_definition name="file" class="Validator\File" />
+			
+			<validator_definition name="imagefile" class="Validator\ImageFile" />
+			
+			<validator_definition name="inarray" class="Validator\Inarray">
+				<ae:parameter name="sep">,</ae:parameter>
+			</validator_definition>
+			
+			<validator_definition name="isset" class="Validator\Isset" />
+			
+			<validator_definition name="isnotempty" class="Validator\IsNotEmpty" />
+
+			<validator_definition name="json" class="Validator\Json" />
+			
+			<validator_definition name="not" class="Validator\Notoperator" />
+			
+			<validator_definition name="number" class="Validator\Number">
+				<ae:parameter name="type">int</ae:parameter>
+			</validator_definition>
+			
+			<validator_definition name="or" class="Validator\Oroperator">
+				<ae:parameter name="break">true</ae:parameter>
+			</validator_definition>
+			
+			<validator_definition name="regex" class="Validator\Regex">
+				<ae:parameter name="match">true</ae:parameter>
+			</validator_definition>
+			
+			<validator_definition name="set" class="Validator\Set" />
+			
+			<validator_definition name="text" class="Validator\Text">
+				<ae:parameter name="min">1</ae:parameter>
+			</validator_definition>
+			
+			<validator_definition name="xor" class="Validator\Xoroperator" />
+			
+			
+		</validator_definitions>
+	</ae:configuration>
+	
+</ae:configurations>

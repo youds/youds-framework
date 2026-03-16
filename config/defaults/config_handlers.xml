@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://framework.youds.com/xml/config/global/envelope" xmlns="http://framework.youds.com/xml/config/parts/config_handlers">
+	<ae:configuration>
+		<handlers>
+			<!--
+				+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+				| Core Youds Framework configuration handlers.                                |
+				+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+			-->
+
+			<handler pattern="%core.config_dir%/settings.xml" class="SettingHandler">
+				<validation>%core.src_dir%/config/xsd/settings.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/settings.xsl</transformation>
+			</handler>
+			<handler pattern="%core.config_dir%/integrations.xml" class="IntegrationsHandler">
+				<validation>%core.src_dir%/config/xsd/integrations.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/integrations.xsl</transformation>
+			</handler>
+
+			<handler pattern="%core.config_dir%/factories.xml" class="FactoryHandler">
+				<validation>%core.src_dir%/config/xsd/factories.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/factories.xsl</transformation>
+			</handler>
+
+			<handler pattern="%core.config_dir%/databases.xml" class="DatabaseHandler">
+				<validation>%core.src_dir%/config/xsd/databases.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/databases.xsl</transformation>
+			</handler>
+
+			<handler pattern="%core.config_dir%/action_filters.xml" class="FilterHandler">
+				<validation>%core.src_dir%/config/xsd/filters.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/filters.xsl</transformation>
+			</handler>
+
+			<handler pattern="%core.config_dir%/global_filters.xml" class="FilterHandler">
+				<validation>%core.src_dir%/config/xsd/filters.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/filters.xsl</transformation>
+			</handler>
+
+			<handler pattern="%core.config_dir%/output_types.xml" class="OutputTypeHandler">
+				<validation>%core.src_dir%/config/xsd/output_types.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/output_types.xsl</transformation>
+			</handler>
+			
+			<handler pattern="%core.src_dir%/defaults/config/output_types.xml" class="OutputTypeHandler">
+				<validation>%core.src_dir%/config/xsd/output_types.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/output_types.xsl</transformation>
+			</handler>
+			
+			<handler pattern="%core.cache_dir%/config/output_types.xml*" class="OutputTypeHandler">
+				<validation>%core.src_dir%/config/xsd/output_types.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/output_types.xsl</transformation>
+			</handler>
+
+			<handler pattern="%core.config_dir%/logging.xml" class="LoggingHandler">
+				<validation>%core.src_dir%/config/xsd/logging.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/logging.xsl</transformation>
+			</handler>
+
+			<handler pattern="%core.config_dir%/roles.xml" class="RbacDefinitionHandler">
+				<validation>%core.src_dir%/config/xsd/roles.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/roles.xsl</transformation>
+			</handler>
+
+			<handler pattern="%core.config_dir%/routing.xml" class="RoutingHandler">
+				<validation>%core.src_dir%/config/xsd/routing.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/routing.xsl</transformation>
+			</handler>
+			
+			<handler pattern="%core.src_dir%/defaults/config/routing.xml" class="RoutingHandler">
+				<validation>%core.src_dir%/config/xsd/routing.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/routing.xsl</transformation>
+			</handler>
+
+			<handler pattern="%core.config_dir%/translation.xml" class="TranslationHandler">
+				<validation>%core.src_dir%/config/xsd/translation.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/translation.xsl</transformation>
+			</handler>
+			
+			<handler pattern="%core.config_dir%/testing.xml" class="TestingHandler">
+				<validation>%core.src_dir%/config/xsd/testing.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/testing.xsl</transformation>
+			</handler>
+
+            <handler pattern="%core.config_dir%/validators.xml" class="ValidatorsHandler">
+                <validation>%core.src_dir%/config/xsd/validators.xsd</validation>
+                <transformation>%core.src_dir%/config/xsl/validators.xsl</transformation>
+            </handler>
+
+            <handler pattern="%core.core_dir%/chains/*.xml" class="ValidatorsHandler">
+                <validation>%core.src_dir%/config/xsd/validators.xsd</validation>
+                <transformation>%core.src_dir%/config/xsl/validators.xsl</transformation>
+            </handler>
+
+            <handler pattern="%core.defaults_dir%/core/chains/*.xml" class="ValidatorsHandler">
+                <validation>%core.src_dir%/config/xsd/validators.xsd</validation>
+                <transformation>%core.src_dir%/config/xsl/validators.xsl</transformation>
+            </handler>
+
+			<handler pattern="%core.storage_dir%/cache/*.xml" class="CachingHandler">
+				<validation>%core.src_dir%/config/xsd/caching.xsd</validation>
+				<transformation>%core.src_dir%/config/xsl/caching.xsl</transformation>
+			</handler>
+			
+			<handler pattern="%core.src_dir%/routing/soap/wsdl.xml" class="WsdlHandler">
+				<transformation>%core.src_dir%/routing/soap/wsdl.xsl</transformation>
+			</handler>
+			
+			<handler pattern="%core.cldr_dir%/locales/*.xml" class="LdmlHandler" />
+			<handler pattern="%core.cldr_dir%/supplementalData.xml" class="LdmlSupplementalHandler" />
+		</handlers>
+	</ae:configuration>
+</ae:configurations>

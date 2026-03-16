@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:envelope="http://framework.youds.com/xml/config/global/envelope"
+	xmlns:types="http://framework.youds.com/xml/config/global/types"
+	xmlns="http://framework.youds.com/xml/config/parts/testing"
+	targetNamespace="http://framework.youds.com/xml/config/parts/testing"
+	elementFormDefault="qualified"
+	version="$Id$">
+
+	<xs:import namespace="http://framework.youds.com/xml/config/global/types"
+	           schemaLocation="../_types.xsd" />
+	<xs:import namespace="http://framework.youds.com/xml/config/global/envelope"
+	           schemaLocation="../_envelope.xsd" />
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace"
+	           schemaLocation="../vendor/http/www.w3.org/XML/1998/namespace/2009-01.xsd" />
+
+
+	<!-- Settings -->
+	<xs:complexType name="setting" mixed="true">
+		<xs:group ref="envelope:parameters" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute ref="xml:space" />
+		<xs:attribute ref="envelope:literalize" />
+	</xs:complexType>
+
+	<xs:complexType name="settings">
+		<xs:sequence>
+			<xs:element name="setting" type="setting"
+			            maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:group name="settings">
+		<xs:choice>
+			<xs:element name="settings" type="settings"
+			            minOccurs="0" />
+			<xs:element name="setting" type="setting"
+			            minOccurs="0" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Suites -->
+	<xs:simpleType name="include">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+	
+	<xs:complexType name="suite">
+		<xs:sequence>
+			<xs:element name="include" type="include"
+			            maxOccurs="unbounded" />
+			
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+		
+	</xs:complexType>
+
+	<xs:group name="suite">
+		<xs:choice>
+			<xs:element name="suites" type="suites"
+			            minOccurs="0" />
+			<xs:element name="suite" type="suite"
+			            minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="include" type="include"
+			            minOccurs="0" maxOccurs="unbounded" />						
+		</xs:choice>
+	</xs:group>
+	
+	<xs:complexType name="suites">
+		<xs:sequence>
+			<xs:element name="suite" type="suite"
+			            maxOccurs="unbounded" />
+			
+		</xs:sequence>
+		<xs:attribute name="default" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:group name="suites">
+		<xs:choice>
+			<xs:element name="suites" type="suites"
+			            minOccurs="0" />
+			<xs:element name="suite" type="suite"
+			            minOccurs="0" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+
+
+	<!-- Hooks -->
+	<xs:simpleType name="file">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+	<xs:simpleType name="name">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+	<xs:simpleType name="content">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+	
+	<xs:complexType name="chain">
+		<xs:sequence>
+			<xs:element name="content" type="content"
+			            maxOccurs="unbounded" />
+			<xs:element name="name" type="name"
+			            maxOccurs="unbounded" />
+			
+		</xs:sequence>
+		
+	</xs:complexType>
+
+	<xs:group name="chain">
+		<xs:choice>
+			<xs:element name="content" type="chain"
+			            minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="include" type="include"
+			            minOccurs="0" maxOccurs="unbounded" />						
+		</xs:choice>
+	</xs:group>
+	
+	<xs:complexType name="hook">
+		<xs:all>
+			<xs:element name="chain" type="chain"
+			            maxOccurs="1" minOccurs="0" />
+			<xs:element name="file" type="file"
+			            maxOccurs="1" minOccurs="0" />
+		</xs:all>
+		<xs:attribute name="name" type="xs:string" use="required" />
+		
+	</xs:complexType>
+
+	<xs:group name="hook">
+		<xs:choice>
+			<xs:element name="hooks" type="hooks"
+			            minOccurs="0" />
+			<xs:element name="hook" type="hook"
+			            minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="chain" type="chain"
+			            minOccurs="0" maxOccurs="unbounded" />						
+			<xs:element name="include" type="include"
+			            minOccurs="0" maxOccurs="unbounded" />						
+		</xs:choice>
+	</xs:group>
+	
+	<xs:complexType name="hooks">
+		<xs:sequence>
+			<xs:element name="hook" type="hook"
+			            maxOccurs="unbounded" />
+			
+		</xs:sequence>
+		<xs:attribute name="default" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:group name="hooks">
+		<xs:choice>
+			<xs:element name="hooks" type="hooks"
+			            minOccurs="0" />
+			<xs:element name="hook" type="hook"
+			            minOccurs="0" maxOccurs="unbounded" />
+		</xs:choice>
+	</xs:group>
+	
+	<!-- Configuration -->
+	<xs:group name="configuration">
+		<xs:sequence>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded" >
+				<xs:group ref="settings"
+				          minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="suites" type="suites" />
+				<xs:element name="hooks" type="hooks" />
+			</xs:sequence>
+			
+		</xs:sequence>
+	</xs:group>
+</xs:schema>
