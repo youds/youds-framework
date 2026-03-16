@@ -1,4 +1,4 @@
-Youds Framework LICENSE INFORMATION
+YOUDS FRAMEWORK LICENSE INFORMATION
 =========================
 
 Copyright (c) 2022-2026 the Youds Framework Project.
